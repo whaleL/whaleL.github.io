@@ -470,11 +470,13 @@ body {
   bottom: 0;
   width: 100%;
   min-height: 50px;
+  border-radius: 10px;
 }
 .footer-inner {
   box-sizing: border-box;
   margin: 20px auto;
   width: calc(100% - 252px);
+  border-radius: 10px;
 }
 @media (min-width: 1600px) {
   .container .footer-inner {
@@ -1834,7 +1836,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff0396;
+  background: #b4ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
