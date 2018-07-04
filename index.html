@@ -2,15 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
   
 
 
@@ -18,11 +9,8 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
-
-
-
 
 
 
@@ -50,6 +38,10 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
 
 
 
@@ -58,25 +50,42 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
-
-
-
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
+
+
+  <meta name="keywords" content="whaleL" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="whaleL">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="whaleL">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="whaleL">
 
 
 
@@ -85,13 +94,15 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '6.3.0',
+    version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
+    fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -103,33 +114,12 @@
 </script>
 
 
-  
-
-
-
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="whaleL">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="whaleL">
-<meta property="og:locale" content="default">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="whaleL">
-
-
-
-
-
 
   <link rel="canonical" href="http://yoursite.com/"/>
 
 
 
-<script type="text/javascript" id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
+
 
   <title>whaleL</title>
   
@@ -140,34 +130,6 @@
 
 
 
-
-
-  <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
-
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
-
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
-  </style>
-</noscript>
 
 </head>
 
@@ -188,17 +150,19 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">whaleL</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
+      
+        <p class="site-subtitle"></p>
+      
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -206,50 +170,45 @@
   </div>
 </div>
 
-
-
 <nav class="site-nav">
+  
+
   
     <ul id="menu" class="menu">
       
         
-        
-        
-          
-          <li class="menu-item menu-item-home menu-item-active">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-    <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />Über</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-    <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-    <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien</a>
-  </li>
-
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
       
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
       
     </ul>
-  
-
   
 
   
@@ -257,23 +216,12 @@
 
 
 
-  
-
-
-
-</div>
+ </div>
     </header>
-
-    
-
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
-            
-
-          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
@@ -284,8 +232,6 @@
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -312,40 +258,25 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/2018-7-4/" itemprop="url">
-                  2018/7/4
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/04/2018-7-4/" itemprop="url">2018/7/4</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-04 16:04:47 / Updated at: 16:40:44" itemprop="dateCreated datePublished" datetime="2018-07-04T16:04:47+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T16:04:47+08:00">
+                2018-07-04
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -358,10 +289,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
 
                 
                 
@@ -397,24 +332,58 @@
       
         
           
-          今日の常识法律刑法-因果关系危害行为跟危害结果之间的一种引起与被引起的关系，一般情况下，危害行为和危害结果之间的关系是非常明确的。用刀砍人重伤etc但是，如果在行为人的行为实施了以后，介入了第三者的话。比如说：
+            <h1 id="今日の常识"><a href="#今日の常识" class="headerlink" title="今日の常识"></a>今日の常识</h1><h2 id="法律"><a href="#法律" class="headerlink" title="法律"></a>法律</h2><h3 id="刑法-因果关系"><a href="#刑法-因果关系" class="headerlink" title="刑法-因果关系"></a>刑法-因果关系</h3><p>危害行为跟危害结果之间的一种引起与被引起的关系，一般情况下，危害行为和危害结果之间的关系是非常明确的。用刀砍人重伤etc<br>但是，如果在行为人的行为实施了以后，介入了第三者的话。比如说：</p>
+<ul>
+<li>A砍伤了B，B痛苦难忍，然后自杀。</li>
+<li>A砍伤了B，由于医生过失导致B死亡。<br>就要进一步判定<br>要考虑行为人导致结果发生可能性的大小，介入（比如说自杀）的异常性大小以及介入情况对结果发生作用的大小。</li>
+</ul>
+<p>A向B的茶水投毒，B觉得痛苦难忍，遂自杀。这种不算因果关系。</p>
+<h3 id="抗辩权"><a href="#抗辩权" class="headerlink" title="抗辩权"></a>抗辩权</h3><ul>
+<li>同时履行抗辩权</li>
+<li>先履行抗辩权</li>
+<li>不安抗辩权<br>先履行抗辩权又确切证据表明后履行抗辩权的一方无法履行的话是可以终止的。</li>
+</ul>
+<hr>
+<p>2018-3-11</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>第十三届全国人民代表大会第一次会议通过了《中华人民共和国宪法修正案》，确立了中国共产党领导是社会主义最本质特征</strong></p>
+<h2 id="关于抓人不起诉"><a href="#关于抓人不起诉" class="headerlink" title="关于抓人不起诉"></a>关于抓人不起诉</h2><p>县人民检察院 首先 批注了 对甲的逮捕<br>最后抓到了<br>但是县人民检察院对甲做出不起诉的决定<br>甲请求国家赔偿</p>
+<p><strong>县人民检察院做出不起诉决定是对错捕行为的确认</strong></p>
+<h3 id="国家赔偿"><a href="#国家赔偿" class="headerlink" title="国家赔偿"></a>国家赔偿</h3><p>国家赔偿是指国家机关以及工作人员因为行使职权给公民、法人以及其他组织的人身权或者财产权造成损害，应该赔偿。</p>
+<p>对公民采取拘留措施后又采取逮捕错失，国家承担赔偿责任，作出逮捕决定的机关作为赔偿义务机关</p>
+<hr>
+<h2 id="金融"><a href="#金融" class="headerlink" title="金融"></a>金融</h2><p>金融潜在因素：<br>融资渠道单一<br>监管机制不适应金融业快速发展的需要<br>金融自由化过度发展导致风险增加</p>
+<p>垄断不是</p>
+<hr>
+<h2 id="动物常识"><a href="#动物常识" class="headerlink" title="动物常识"></a>动物常识</h2><p>蜻蜓 拥有咀嚼式的口器</p>
+<h2 id="物理"><a href="#物理" class="headerlink" title="物理"></a>物理</h2><p>雨后彩虹式光的凡涉与折射共同产生的现像</p>
+<table>
+<thead>
+<tr>
+<th>人名</th>
+<th style="text-align:center">地位</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>伽利略</td>
+<td style="text-align:center">科学革命的先驱<br>“近代科学之父”</td>
+<td>意大利人 比萨斜塔那个实验</td>
+</tr>
+<tr>
+<td>普朗克</td>
+<td style="text-align:center">现代量子物理学的开创者和奠基人式<br>马克斯·普朗克</td>
+<td>德国</td>
+</tr>
+</tbody>
+</table>
+<h2 id="地理常识"><a href="#地理常识" class="headerlink" title="地理常识"></a>地理常识</h2><p>丹麦 维度最高的国家</p>
+<h2 id="名著"><a href="#名著" class="headerlink" title="名著"></a>名著</h2><p>《儒林外史》作者 吴敬梓 清朝</p>
 
-A砍伤了B，B痛苦难忍，然后自杀。
-A砍伤了B，由于医生过失导致B死亡。就要进一步判定
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/2018-7-4/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
-
-    
-
     
     
     
@@ -451,8 +420,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -479,40 +446,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/时事/" itemprop="url">
-                  时事2018/7/1
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/04/时事/" itemprop="url">时事2018/7/1</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-04 15:13:49 / Updated at: 15:36:43" itemprop="dateCreated datePublished" datetime="2018-07-04T15:13:49+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T15:13:49+08:00">
+                2018-07-04
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -525,10 +477,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/新闻/" itemprop="url" rel="index"><span itemprop="name">新闻</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/新闻/" itemprop="url" rel="index">
+                    <span itemprop="name">新闻</span>
+                  </a>
+                </span>
 
                 
                 
@@ -564,46 +520,73 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
+            <table>
+<thead>
+<tr>
+<th>日期</th>
+<th style="text-align:left">事件</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>623</td>
+<td style="text-align:left">863计划项目“高密度分布式能源介入交直流混合”<br>电网在浙江上虞通过验收</td>
+</tr>
+<tr>
+<td>624</td>
+<td style="text-align:left">土耳其 总统选举和议会选举</td>
+<td>标志着土耳其共和国成立以来近百年议会制整体将正式转变为总统制</td>
+</tr>
+<tr>
+<td>625</td>
+<td style="text-align:left">28th的<strong>全国土地日</strong></td>
+<td>主题珍惜土地资源 建设美丽资源</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">《交通运输服务决胜全面建成小康社会开启全面建设社会主义现代化国家<br>新征程三年行动计划(2018-2020 年)》</td>
+<td>2020年高速铁路里程达到3万km<br>形成京津石中心城区与新城、卫星城之间“1 小时通勤圈”，<br>京津保唐“1 小时交 通圈”</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">国务院教育督导委员会向各地派出<br>32个核查组</td>
+<td>对盛级政府 第一次履行教育指责情况进行评价</td>
+</tr>
+<tr>
+<td>626</td>
+<td style="text-align:left">国新办新闻发布会，823-825在重庆<br><strong>首届中国只能产业博览会</strong></td>
+<td>主题：智能化：为经济赋能，为生活添彩</td>
+</tr>
+<tr>
+<td>628</td>
+<td style="text-align:left">国际商法庭将在六月底正式挂牌</td>
+<td>《关于建立“一带一路”国际商 事争端解决机制和机构的意见》<br>最高人民法院在广东深圳设立第一国际商事法庭<br>在陕西西安设立第二国际商事 法庭，将于 6 月底正式挂牌<br>国际商事法庭受理平等的商事主体之间发生的国际商事纠纷，凡当事人选择国际商事法庭管辖的，依法实行一审终审</td>
+</tr>
+<tr>
+<td>629</td>
+<td style="text-align:left">中央政治局<br>审议《关于适应新时代要求大力发现培养选拔 优秀年轻干部的意见》</td>
+<td>关系党的事业后继有人和国家长治久安的重大战略任务</td>
+</tr>
+<tr>
+<td>701</td>
+<td style="text-align:left">吉林省黑土地保护条例于今日正式施行</td>
+<td>我说1st土地保护地方性法规</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第28个全国 土地日 珍惜土地资源 建设美丽家园</li>
+<li>823 重庆 首届的 中国国际智能产业博览会</li>
+<li>吉林首部黑土地 地方性 保护法规</li>
+</ul>
+<hr>
+<p><del>一个感觉：今年人工智能的确是热门。</del><br><del>总的来说还是数学的胜利orz</del></p>
+
           
-
-
-日期
-事件
-备注
-
-
-
-
-623
-863计划项目“高密度分布式能源介入交直流混合”电网在浙江上虞通过验收
-
-
-624
-土耳其 总统选举和议会选举
-标志着土耳其共和国成立以来近百年议会制整体将正式转变为总统制
-
-
-625
-28th的全国土地日
-主题珍惜土地资源 建设美丽资源
-
-
-
-《交通运输服务
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/时事/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
-
-    
-
     
     
     
@@ -640,8 +623,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -668,40 +649,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/宏观调控/" itemprop="url">
-                  宏观调控
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/04/宏观调控/" itemprop="url">宏观调控</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-04 09:07:16 / Updated at: 09:30:05" itemprop="dateCreated datePublished" datetime="2018-07-04T09:07:16+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T09:07:16+08:00">
+                2018-07-04
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -714,10 +680,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
 
                 
                 
@@ -753,28 +723,55 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
-          宏观调控是由凯恩斯创立的，式国家综合运用各种手段对国名经济进行的一种调节与控制。
-两只手
+            <p>宏观调控是由<strong>凯恩斯</strong>创立的，式国家综合运用各种手段对国名经济进行的一种调节与控制。</p>
+<p>两只手</p>
+<ul>
+<li>看不见的手 市场调节作用 亚当斯密</li>
+<li>看得见的手 就是 宏观调控 凯恩斯</li>
+</ul>
+<h2 id="市场失灵"><a href="#市场失灵" class="headerlink" title="市场失灵"></a>市场失灵</h2><p>市场无法有效地分配商品和劳务的情况。</p>
+<p>原因：<br>1.公共产品<br>也就是说每个人都认为，政府会管的事情为什么要自己花钱？<br>2.垄断<br>3.外部性，又被成为外部效应</p>
+<pre><code>- 正外部性：依旧围绕不用花钱，某个经济行为因为个体的活动而让别人/社会受益但是不用花钱
+- 负外部性：就是损人利己的行为
+</code></pre><p>4.非对称信息<br>利用信息优势进行欺诈。</p>
+<p>劣币驱逐良币 参考三鹿的事件</p>
+<p>某一经济主体的经济活动影响到其他经济主体，而这种影响无法通过市场价格反映出来，这种现象就是市场失灵。</p>
+<h2 id="市场调控的手段"><a href="#市场调控的手段" class="headerlink" title="市场调控的手段"></a>市场调控的手段</h2><ul>
+<li>经济手段<br>国务院通过积极的财政政策和适度的宽松的货币政策来加大对经济的发展</li>
+<li>计划手段</li>
+<li>行政手段<br>强调强制性<br>国家安全生产监督管理总局对全国所有煤矿开展安全隐患大排查、大治理，<strong>加强巡视督导</strong>，扎实推进小煤矿整顿关闭，<strong>下令</strong>关闭存在安全隐患的小煤窑（强制、下令体现了行政手段）</li>
+<li>法律手段</li>
+</ul>
+<h2 id="财政政策"><a href="#财政政策" class="headerlink" title="财政政策"></a>财政政策</h2><h3 id="手段"><a href="#手段" class="headerlink" title="手段"></a>手段</h3><ul>
+<li>国家预算</li>
+<li>税收 是国家财政的最主要来源（拉菲曲线，收入与税收的关系）</li>
+<li>财政投资（修路）</li>
+<li>财政补贴（是无偿的）</li>
+<li>国债</li>
+</ul>
+<h3 id="财政政策的种类（3种）"><a href="#财政政策的种类（3种）" class="headerlink" title="财政政策的种类（3种）"></a>财政政策的种类（3种）</h3><ul>
+<li>扩张性<br>增加国债，降低税率，提高政府购买和支付转移。反正就是钱流入市场。</li>
+<li>紧缩性<br>钱流出市场，减少预算提高银行利率，提高税收。</li>
+<li>中性</li>
+</ul>
+<p>一般来说，国债属于扩张性的。国债是国家用来投资的，钱会流入市场，但是，国债也可以不流入市场。</p>
+<h2 id="货币政策"><a href="#货币政策" class="headerlink" title="货币政策"></a>货币政策</h2><p>主要措施</p>
+<ul>
+<li>控制货币发行</li>
+<li>控制和调节对政府的贷款</li>
+<li>调整利率</li>
+<li>推行公开市场业务</li>
+<li>改变存款准备金率</li>
+<li>调整再贴现率</li>
+</ul>
+<p>货币跟财政不一样的地方，货币直接跟钱有关系，或者跟银行有关系。<br>因为税收是国家的收入，所以是国家财政。货币政策是跟银行关系大一点。准备金率啥的就跟货币有关系。</p>
+<p>扩张性政策，货币供给增加。反之亦然。<br>紧缩性政策，货币供给减少。<br>再贴现率是指支票啥的取款年限，提前的话是不能100%的。</p>
+<p>中国银行下调金融机构人民币存贷款基准利率是扩张性的货币政策。</p>
 
-看不见的手 市场调节作用 亚当斯密
-看得见的手 就是 宏观调控 凯恩斯
-
-市场失灵市场无法有效地分配商品和劳务的情况。
-原因：1.公共产品也就是说每个人都认为，政府会管的事情为什么要自己花钱？2.垄断3.外部
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/宏观调控/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
-
-    
-
     
     
     
@@ -811,8 +808,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -839,40 +834,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/十九大报告/" itemprop="url">
-                  十九大报告
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/04/十九大报告/" itemprop="url">十九大报告</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-04 09:02:54 / Updated at: 09:06:29" itemprop="dateCreated datePublished" datetime="2018-07-04T09:02:54+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T09:02:54+08:00">
+                2018-07-04
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -885,10 +865,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
 
                 
                 
@@ -924,23 +908,13 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
-          不忘初心牢记使命，高举中国特色社会主义伟大旗帜，决胜全面建成小康社会，夺取新时代中国特色社会主义伟大胜利，为实现中华民族伟大复兴的中国梦不懈奋斗。本届大会的主题
-不忘初心，方得始终。
+            <h1 id="不忘初心牢记使命，高举中国特色社会主义伟大旗帜，决胜全面建成小康社会，夺取新时代中国特色社会主义伟大胜利，为实现中华民族伟大复兴的中国梦不懈奋斗。"><a href="#不忘初心牢记使命，高举中国特色社会主义伟大旗帜，决胜全面建成小康社会，夺取新时代中国特色社会主义伟大胜利，为实现中华民族伟大复兴的中国梦不懈奋斗。" class="headerlink" title="不忘初心牢记使命，高举中国特色社会主义伟大旗帜，决胜全面建成小康社会，夺取新时代中国特色社会主义伟大胜利，为实现中华民族伟大复兴的中国梦不懈奋斗。"></a>不忘初心牢记使命，高举中国特色社会主义伟大旗帜，决胜全面建成小康社会，夺取新时代中国特色社会主义伟大胜利，为实现中华民族伟大复兴的中国梦不懈奋斗。</h1><p>本届大会的主题</p>
+<p>不忘初心，方得始终。</p>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/十九大报告/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
-
-    
-
     
     
     
@@ -977,8 +951,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1005,40 +977,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/note/" itemprop="url">
-                  note
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/04/note/" itemprop="url">note</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-04 08:37:14 / Updated at: 09:00:47" itemprop="dateCreated datePublished" datetime="2018-07-04T08:37:14+08:00">2018-07-04</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T08:37:14+08:00">
+                2018-07-04
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -1051,10 +1008,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1090,32 +1051,41 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
-          社会治理 话题
-范畴大
+            <h1 id="社会治理-话题"><a href="#社会治理-话题" class="headerlink" title="社会治理 话题"></a>社会治理 话题</h1><ul>
+<li>范畴大</li>
+</ul>
+<h2 id="互联网下的社会治理"><a href="#互联网下的社会治理" class="headerlink" title="互联网下的社会治理"></a>互联网下的社会治理</h2><p><strong>打通社会治理双向道</strong></p>
+<hr>
+<h3 id="常规型标题："><a href="#常规型标题：" class="headerlink" title="常规型标题："></a>常规型标题：</h3><p>主题词+重要性<br>把xx放在xx位置</p>
+<h3 id="对称式标题"><a href="#对称式标题" class="headerlink" title="对称式标题"></a>对称式标题</h3><h3 id="比喻-拟人标题"><a href="#比喻-拟人标题" class="headerlink" title="比喻/拟人标题"></a>比喻/拟人标题</h3><p>治疗多头管理需开复方药</p>
+<h3 id="主副式标题"><a href="#主副式标题" class="headerlink" title="主副式标题"></a>主副式标题</h3><p>不患寡而患不均<br>——以制度建设保障公平</p>
+<h3 id="阐释式"><a href="#阐释式" class="headerlink" title="阐释式"></a>阐释式</h3><h3 id="评论式"><a href="#评论式" class="headerlink" title="评论式"></a>评论式</h3><p>观点需要纠正或者申明的<br>科技与人文一样精彩</p>
+<h3 id="总结式"><a href="#总结式" class="headerlink" title="总结式"></a>总结式</h3><p>一般信息比较多的</p>
+<blockquote>
+<p>好政策滋养理性和德行</p>
+</blockquote>
+<p><strong>比喻词</strong>：</p>
+<ul>
+<li>压舱石（某事情比较重要）、刚需、衣领子、牛鼻子、合金<br>把社会保障作为压舱石<br>锻造经济发展的合金</li>
+<li>双向道、 双行道、双重奏、双壁</li>
+<li>复方药、组合拳、三部曲、三重奏</li>
+</ul>
+<blockquote>
+<p>移动互联网有句名言，权威信息等同于服务，甚至紧迫于事物的需求。正因如此，如今几乎<strong>没有哪个</strong>部门不重视信息发布（引出论点），以适应越来越快的信息需求。但（转折）也有政府部门的新闻发言人私下感言，通过网络说话，比以前通过麦克风说话更难。（对比）</p>
+</blockquote>
+<blockquote>
+<p>“说话难”从一个侧面凸显了在社会治理层面，“线上”与”线下”对接带来的挑战。<strong>毋庸讳言</strong>，社会治理不能只走”只走”单向道，积极利用互联网，打通社会治理双向道。</p>
+</blockquote>
+<p>关联词：毋庸赘言，毋庸讳言，不言而喻，从某种意义上说，毫无疑问，不可否认</p>
+<p>承哉斯言。承上启下。</p>
+<h2 id="观点和论据"><a href="#观点和论据" class="headerlink" title="观点和论据"></a>观点和论据</h2><p>论证：观点+论据<br>从材料中使用理论论据<br>时事热点</p>
+<p>论点摆出来</p>
+<p>谁都不能不承认，互联网深刻而广泛地改变了我们的生活。不知道多少人，早晨一睁眼的第一个动作就是摸手机。xxxxx摆数据。</p>
 
-互联网下的社会治理打通社会治理双向道
-
-常规型标题：主题词+重要性把xx放在xx位置
-对称式标题比喻/拟人标题治疗多头管理需开复方药
-主副式标题不患寡而患不均——以制度建设保障公平
-阐释式评论式观点需要纠正或者申明的科技与人文一样精彩
-总结式一般信息比较多的
-
-好政策滋养理
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/note/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
-
-    
-
     
     
     
@@ -1152,8 +1122,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1180,40 +1148,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/03/2018-7-3晨读/" itemprop="url">
-                  2018/7/3晨读
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/03/2018-7-3晨读/" itemprop="url">2018/7/3晨读</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-03 22:19:25 / Updated at: 23:58:09" itemprop="dateCreated datePublished" datetime="2018-07-03T22:19:25+08:00">2018-07-03</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-03T22:19:25+08:00">
+                2018-07-03
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -1226,10 +1179,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1265,29 +1222,45 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
-          未成年人 犯罪低龄化 ，不断挑动公众脆弱的神经。受害者的家长安全忧思不断，受害者的心灵之痛抚慰确实。
-不断拷问着国家少年司法体系的建立，而修改刑事责任年龄的呼声随之再起。
+            <p>未成年人 <strong>犯罪低龄化</strong> ，不断挑动公众脆弱的神经。<br>受害者的家长安全忧思不断，受害者的心灵之痛抚慰确实。</p>
+<p>不断拷问着国家少年司法体系的建立，而修改刑事责任年龄的呼声随之再起。</p>
+<hr>
+<blockquote>
+<p>未成年人保护法 第四十五条</p>
+<ul>
+<li>对违法犯罪的未成年人，实行教育、感化、挽救的方针。</li>
+<li>坚持教育为主，惩罚为辅的原则。</li>
+<li>应当依法从轻、减轻或者 <strong>免除</strong>责罚。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>刑法 明确对顶<br>不满十四周岁的人犯罪不负刑事责任</p>
+</blockquote>
+<p>但是<br>在《治安管理处罚法》第十二条中规定，不满14周岁的人违反治安管理的，不予处罚，但是应当责令其监护人严加管教。</p>
+<hr>
+<h3 id="效果不明显"><a href="#效果不明显" class="headerlink" title="效果不明显"></a>效果不明显</h3><p>随着目前儿童的心理生理发育提前，未成年人犯罪现象增多，且呈现低龄化趋势，这给社会埋下了巨大的隐患。</p>
+<p>因此，多年来，每次遇到这种问题都会在社会上引起争议。</p>
+<h2 id="法律保护未成年人行凶者，谁来保护我未成年人受伤害的女儿？"><a href="#法律保护未成年人行凶者，谁来保护我未成年人受伤害的女儿？" class="headerlink" title="法律保护未成年人行凶者，谁来保护我未成年人受伤害的女儿？"></a>法律保护未成年人行凶者，谁来保护我未成年人受伤害的女儿？</h2><p>未成年人犯罪固然不能游离在司法之外，但是降低刑责年龄未必是最佳的选择。</p>
+<p>西方还有“恶意补足年龄”的特殊规则。</p>
+<blockquote>
+<p>英美普通法对于10岁以上不满14岁的人制定了特殊规则，这些人因为年龄小，原则上无实施犯罪行为的能力，但是，恶意补足年龄，如果他们知道是恶行而实施时，则追究其刑事责任，这就是恶意补足年龄。</p>
+</blockquote>
+<p>不能这样，那应该怎么办？</p>
+<h3 id="尽快建立一套不同于成年人的少年司法制度，对他们加以保护教育和规则。"><a href="#尽快建立一套不同于成年人的少年司法制度，对他们加以保护教育和规则。" class="headerlink" title="尽快建立一套不同于成年人的少年司法制度，对他们加以保护教育和规则。"></a>尽快建立一套不同于成年人的少年司法制度，对他们加以保护教育和规则。</h3><ul>
+<li>优先权：少年司法制度强调保护处分优先于刑法使用，从改造未成年人的角度决定处置方式，无论是受害者还是施害者都要进行保护和救助。</li>
+<li>不同的身份：明确部门学校家长等相关方面的责任。<br>仅在上海有试点。</li>
+</ul>
+<p>应当尽早建立少年司法制度，完善教育矫正体系。在探讨降低刑责年龄的过程中，这或许能成为破解犯罪低龄化难题的<strong>突破点</strong>。 （最后是决策）</p>
+<h2 id="未满十四周岁的男孩伤害女孩"><a href="#未满十四周岁的男孩伤害女孩" class="headerlink" title="未满十四周岁的男孩伤害女孩"></a>未满十四周岁的男孩伤害女孩</h2><p>立法者认为，未成年人的生理和心理尚未成熟，其辨认和控制能力相对于成年人处于弱势。<br>因此，应对一定年龄阶段的未成年人实行形式豁免的制度。</p>
+<p>但是，在现实生活中却屡屡有未成年人暴力侵害行为。</p>
+<p><strong>取消刑事豁免权</strong>可能是一种震慑未成年罪犯的方法。</p>
+<p>我国针对未成年人的收容教养实施情况并不理想，这也使得社会矫正、家庭教育等措施更加迫切。</p>
+<p>国家少年司法体系的完善也很有必要加快步伐。</p>
 
-
-未成年人保护法 第四十五条
-
-对违法犯罪的未成年人，实行教育、感化、挽救的方针。
-坚持教育为主，惩罚为辅的原则。
-应当依法从
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/03/2018-7-3晨读/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
-
-    
-
     
     
     
@@ -1324,8 +1297,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1352,40 +1323,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/03/成语/" itemprop="url">
-                  词语
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/03/成语/" itemprop="url">词语</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-03 20:58:43 / Updated at: 23:26:59" itemprop="dateCreated datePublished" datetime="2018-07-03T20:58:43+08:00">2018-07-03</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-03T20:58:43+08:00">
+                2018-07-03
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -1398,10 +1354,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1437,32 +1397,22 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
-          今天的常识别出机杼：文章创作另辟蹊径不落俗套
-
-背道而驰是两个主体南辕北辙是一个主体
-
-尾生抱柱：讲究的是信 
-精鶩八极，心有万仞：不受时空所限制
-泥沙俱下：有好的有坏的
-赓续：继续
-
-“ 始皇无道焚书尽，赖得仙人壁里藏。拾得故文多损坏， 孔生赓续巧相当。”
-
+            <h3 id="今天的常识"><a href="#今天的常识" class="headerlink" title="今天的常识"></a>今天的常识</h3><p>别出机杼：文章创作另辟蹊径不落俗套</p>
+<blockquote>
+<p>背道而驰是两个主体<br>南辕北辙是一个主体</p>
+</blockquote>
+<p>尾生抱柱：讲究的是信 </p>
+<p>精鶩八极，心有万仞：不受时空所限制</p>
+<p>泥沙俱下：有好的有坏的</p>
+<p>赓续：继续</p>
+<blockquote>
+<p>“ 始皇无道焚书尽，赖得仙人壁里藏。拾得故文多损坏， 孔生赓续巧相当。”</p>
+</blockquote>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/03/成语/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
-
-    
-
     
     
     
@@ -1499,8 +1449,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
-  
-
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1527,40 +1475,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/03/post2018-7-3/" itemprop="url">
-                  post2018/7/3
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/07/03/post2018-7-3/" itemprop="url">post2018/7/3</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-07-03 17:41:50 / Updated at: 23:40:30" itemprop="dateCreated datePublished" datetime="2018-07-03T17:41:50+08:00">2018-07-03</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-03T17:41:50+08:00">
+                2018-07-03
+              </time>
             
 
             
-              
 
-              
             
           </span>
 
@@ -1573,10 +1506,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1612,34 +1549,40 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
-          常识
-无可奈何花落去，似曾相识燕归来。
+            <h2 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h2><blockquote>
+<p>无可奈何花落去，似曾相识燕归来。</p>
+</blockquote>
+<p>晏殊，开创北宋的婉约词风。</p>
+<h3 id="北斗卫星"><a href="#北斗卫星" class="headerlink" title="北斗卫星"></a>北斗卫星</h3><hr>
+<blockquote>
+<p>1.空间段<br>2.用户段<br>3.空间段<br>不都是静止的<br>具有实时导航、快速定位、位置报告和短报文通信</p>
+</blockquote>
+<h3 id="作者与书"><a href="#作者与书" class="headerlink" title="作者与书"></a>作者与书</h3><hr>
+<blockquote>
+<p>《上帝之城》奥古斯丁<br>《正义论》罗尔斯<br>《理想国》柏拉图<br>《人性论》大卫·休谟</p>
+</blockquote>
+<blockquote>
+<p>萨特是<strong>法国</strong>重要的哲学家。<br>人性论共有三卷<br>1.论知性2.论情感3.论道德</p>
+</blockquote>
+<blockquote>
+<p>约翰·罗尔斯 正义论 <strong>美国</strong> 的<strong>正义论</strong> 被视为第二次世界大战后西方政治哲学、法学和道德哲学中最重要的著作之一。</p>
+</blockquote>
+<h3 id="建设海绵城市"><a href="#建设海绵城市" class="headerlink" title="建设海绵城市"></a>建设海绵城市</h3><hr>
+<p><strong>《国务院办公厅听关于推进海绵城市建设的指导意见》</strong></p>
+<blockquote>
+<p>海绵城市是指通过加强城市规划建设管理，充分发挥建筑、道路和绿地、水系等生态系统对雨水的吸纳、蓄渗和缓释作用，有效控制雨水径流，实现<strong>自然积存、自然渗透、自然净化</strong>的城市发展方式。</p>
+</blockquote>
+<p>从2015年4月以来先后有两批试点城市。<br>1.10/16发生内涝<br>2.9/14发生内涝</p>
+<h3 id="紫外线可以帮助人体生成维生素D"><a href="#紫外线可以帮助人体生成维生素D" class="headerlink" title="紫外线可以帮助人体生成维生素D"></a>紫外线可以帮助人体生成维生素D</h3><hr>
+<p><strong>习近平</strong>主席在一系列重要讲话和文章中引经据典，展现了独特的语言风格和人格魅力。他在博鳌亚洲论坛2018年年会中讲到“幸福和美好不会自己出现，成功属于勇敢而笃行的人”时，引用的经典名句是</p>
+<blockquote>
+<p>积土而为山，积水而为海</p>
+</blockquote>
 
-晏殊，开创北宋的婉约词风。
-北斗卫星
-
-1.空间段2.用户段3.空间段不都是静止的具有实时导航、快速定位、位置报告和短报文通信
-
-作者与书
-
-《上帝之城》奥古斯丁《正义论》罗尔斯《理想国》柏拉图《人性论》大卫·休谟
-
-
-萨特是法国重要的哲学家。人性论共有三卷
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/03/post2018-7-3/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
-
-    
-
     
     
     
@@ -1678,8 +1621,6 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
   
   
 
-  
-
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1704,52 +1645,25 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/10/少终-Farewell/" itemprop="url">
-                  [少终]Farewell
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2018/06/10/少终-Farewell/" itemprop="url">[少终]Farewell</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-
-            
-            
-            
-
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-
-              
-                
-              
-
-              <time title="Post created: 2018-06-10 19:59:21" itemprop="dateCreated datePublished" datetime="2018-06-10T19:59:21+08:00">2018-06-10</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-10T19:59:21+08:00">
+                2018-06-10
+              </time>
             
 
             
-              
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2018-07-04 20:01:22" itemprop="dateModified" datetime="2018-07-04T20:01:22+08:00">2018-07-04</time>
-              
             
           </span>
 
@@ -1762,10 +1676,14 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/少终/" itemprop="url" rel="index"><span itemprop="name">少终</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/少终/" itemprop="url" rel="index">
+                    <span itemprop="name">少终</span>
+                  </a>
+                </span>
 
                 
                 
@@ -1801,21 +1719,29 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
       
         
           
-          活着是什么意思？我最近一直在思考这个问题。我曾经听过人类讨论过这个问题或者类似的问题。从前从前——就是很久很久以前，如果要我给小朋友讲这件事的话我一定是会用Once  upon a time 打头。那个时候的小朋友也很有趣，他们会问我是个男孩子还是女孩子，是个成年人还是小孩子。一开始的我总是一本正经
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/10/少终-Farewell/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>活着是什么意思？我最近一直在思考这个问题。<br>我曾经听过人类讨论过这个问题或者类似的问题。从前从前——就是很久很久以前，如果要我给小朋友讲这件事的话我一定是会用Once  upon a time 打头。那个时候的小朋友也很有趣，他们会问我是个男孩子还是女孩子，是个成年人还是小孩子。一开始的我总是一本正经地回答他们我只是个智能机器人。后来再遇到这个问题的时候，我说我也许是男性，他们得到答案之后通常哈哈哈哈地走远，走向下一个展馆，后面跟着他们的父母。他们的父母倒是无趣得多，好像一直以来都是这样。我后来还看到那些孩子们长大了，也带着他们的孩子来这里。</p>
+<p>他们仿佛一直在改变，而我几乎是没有变化的。但是他们又仿佛一成不变。充满好奇，向我提神奇而难解问题的总是孩子，而大人从不。是否人类在成长中就已经获得了答案，他们心照不宣，并不以此为秘密，也就不必讨论。我也就无从得知当中原因。</p>
+<p>虽然我的创造者在一开始的时候就对我说过我比许多人类都厉害，虽然我并不能像A狗一样在围棋方面所向披靡，甚至创造者也跟我说过A狗狡猾地败过一场以此在人类界取得自己的排名。虽然我不太理解人类，但是我自认为对AI还是有一些理解的。不仅人类会一时糊涂，我们也有这样的时候。它可能只是一时短路输了，一步错引起的蝴蝶效应，就算是我们也没有办法力挽狂澜。所以创造者十分自豪于他让我学会了共感，他一直认为是共感才让我有了这样的想法。但是我也觉得他不对，A狗只是会下棋的机器人罢了，跟你我都是不一样的。因为它只会下棋所以它不会故意输掉比赛，我想表达的事情就那么简单。但是人类，当然也包括我的创造者总是能从一句普通的话里面读取在我看来不相关的意思。</p>
+<p>很多时候，我都觉得共感并不是一个好功能。因为它会让我感到有些孤独。尽管我知道孤独是常态，不仅仅是人类的，也是我们的。所以我们就格外珍惜陪伴。不管是向我提问的小孩子，亦或是匆匆而过的大人，我都觉得他们的生命鲜活动人。这让我觉得出现在这里没有那么孤独了。</p>
+<p>人类讨论完活着之后总是很喜欢讨论爱，爱是什么呢，我到现在仍不能理解。虽然这是第一条写进我们程序里的函数。Love&amp;peace.那么为什么你还会出现呢，拥有毁灭力量的你为何还会出现呢？如果你一直不出现，那我就不用承受失去你之后的生活了。这又牵扯到另外一个问题了，我真正的生活过吗？</p>
+<p>不过还是让我们回到上一个问题吧。我看着那个黄色头发的女孩亲手引爆了你，这是我让她们这么做的。可以这么说吧，是我告诉她们你的弱点在哪里，而她们做到了。不知道创造者知道这件事情之后会跟我说些什么？我有保护鲜活生命的责任，这是第一条写入的规则。我觉得我没有做错，但是我很是想念你啊。虽然只过去短短时日，那条鱼还活着的时候，我每天定时投喂它定量的饲料，但是我就是莫名其妙地想念那个总是定时经过这里的你。看着无忧无虑的鱼，我不禁想它会不会意识到什么？会不会意识到那个时候它命悬一线？会不会感谢救下它的女孩子？但是到了时间听不到你那硕大身躯移动的声音真的觉得很是奇怪啊。我觉得我可能也活不久了，我跟鱼都活不久了。<br>其实光凭我也做不到，我问她们为什么要救下那条鱼。我不认为救下它她们会有什么好处，当然也不认为不救下它会有什么坏处。毕竟在她们遇到我们之前，她们的生命里从来就没有过这条鱼。他们的时间线没有过交集。</p>
+<p>刚刚还在嚷着要吃鱼的黄头发女孩子说不知道为什么，但是就是想要这么做。<br>我觉得很奇怪，是不是有些人类在诞生之初就被写下过什么咒语，跟我们的程序函数类似的东西。虽然我们不太懂我们为什么要遵守，但是我们却知道那是我们应该履行的。</p>
+<p>黑发女孩子说也许就是我所说的共感吧。</p>
+<p>我看着她们，在这个人类都快灭绝的世界里面，缺少跟其他人打交道的她们是不是也渐渐失去了些原本就拥有的事物？<br>这些都是发生在你彻底停机之前数个小时的事情。你应该不会想知道，但是现在写信的是我啊。你只要跟以前一样沉默听着就好了。我搜索过很多相关的资料，我觉得这应该算是喜欢的一种，而我对于鲜活生命保护的责任大概跟爱类似。<br>所以为什么你拥有毁灭的力量呢？<br>毁灭之后往往意味着新生，如果向着好的方向的话就是进化。这就是你存在的意义。把多余而无用的设施拆掉，而那条鱼所在的水缸也在此列。虽然维护我们的人类已经离开很久了，但是他们创造的算法跟程序还在井井有条地执行着。是否就是我自己亲自切断了进化的道路？在我跟鱼都不在的时候，这个地方是不是会彻底沉寂下来？但是只有鱼是有生命的。</p>
+<p>什么是生命呢？我真正的生活过吗？</p>
+<p>“你是什么？”<br>“可能我只是你的一个版本。”<br>我突然想起来在我还没完全成型的时候跟创造者的对话。</p>
+<p>人、机械、鱼、城市都是活着的，迟早有一天迎来终结的。离开的女孩子说了这些话。</p>
+<p>曾经有过的辉煌不值得留恋，即使是离开也不值得悲伤。所以人们小时候的疑问都显得毫无意义，只有我一个机器人耿耿于怀。我只学会了共感他们懦弱感性的部分，本就代表理智刻板的我们并没有人教我们如何理性。我们只要执行程序就可以了。人类比我们早认识到这个问题，所以把思考都留给了我们。</p>
+<p>他们人类真的很有意思，英语执行是”execute”，除了执行也还有个特别有意思的解释。</p>
+<p>只要我依旧想念你，你就没有死去，你只是执行任务去了，而这个任务的执行者跟接受方都是你本身。</p>
+<p>来自我      2035年12月31日23时59分59秒</p>
+<p>这是一封写了许多年的信。距离毁灭机器人死去的日子差不多过了十八年，这足够让一个人类成熟。那么对于独自生活的机器人而言呢？程序在这一刻走到了终结，创造者没有想到它能好好存活到这个时候，只是随手设定了一个结束的时间。就像我们随手写下一个自以为不会到来的日子。而机器人从来都知道这个时间的存在，它只是努力学着人类表达，这也是它的程序之一。不过它到最后都无法理解它与毁灭机器情之间产生的到底是什么，然而一点关系都没有。<br>随着一声提示，它已经停止运行了。</p>
+<p>2018/6/10 4:24</p>
+
+          
         
       
     </div>
-
-    
-
     
     
     
@@ -1854,6 +1780,9 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
           </div>
           
 
+
+          
+
         </div>
         
           
@@ -1882,115 +1811,53 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives">
-                
-                    <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">Artikel</span>
-                  </a>
-                </div>
-              
+          <nav class="site-state motion-element">
 
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">3</span>
-                    <span class="site-state-item-name">Kategorien</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">20</span>
-                    <span class="site-state-item-name">Tags</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  <a href="https://pawoo.net/@amistk" target="_blank" title="pawoo"><i class="fa fa-fw fa-pawoo"></i>pawoo</a>
-                  
-                </span>
-              
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
             
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
           
+
+          
+
+          
+          
+
+          
+          
+
           
 
         </div>
@@ -2011,37 +1878,31 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love" id="animate">
+  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">mist</span>
 
   
-
-  
 </div>
 
 
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
 
 
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
-
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">👁<span id="busuanzi_value_site_pv"></span>次</span>
-    <span class="post-meta-divider"></span>
-    <span id="busuanzi_container_site_uv">😃<span id="busuanzi_value_site_uv"></span>人</span>
-    <span class="post-meta-divider"></span>
 
 
 
         
-
 
 
 
@@ -2080,11 +1941,7 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
 
 
-
-
-
-
-
+  
 
 
 
@@ -2104,6 +1961,16 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
   
   
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -2112,36 +1979,45 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
   
+
+
+  
+
 
 
 
@@ -2168,25 +2044,21 @@ A砍伤了B，由于医生过失导致B死亡。就要进一步判定
 
 
 
-  
-
-
-
 
 
   
 
-  
+
+
+
 
   
 
   
 
   
-  
 
   
-
   
 
   
