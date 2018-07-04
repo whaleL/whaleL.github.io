@@ -188,7 +188,7 @@ body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
   line-height: 2;
-  color: #987abe;
+  color: #444;
   background: #f5f7f9;
 }
 @media (max-width: 767px) {
@@ -940,9 +940,9 @@ pre .javascript .function {
   display: inline-block;
   padding: 0 20px;
   font-size: 14px;
-  color: #987abe;
+  color: #444;
   background: #fff;
-  border: 2px solid #987abe;
+  border: 2px solid #444;
   text-decoration: none;
   border-radius: 2px;
   transition-property: background-color;
@@ -967,7 +967,7 @@ pre .javascript .function {
   display: block;
   width: 22px;
   height: 2px;
-  background: #987abe;
+  background: #444;
   border-radius: 1px;
 }
 .btn-bar+.btn-bar {
@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d4ffff;
+  background: #e75573;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2857,7 +2857,7 @@ pre .javascript .function {
 .sidebar-inner {
   box-sizing: border-box;
   width: 240px;
-  color: #987abe;
+  color: #444;
   background: #fff;
   box-shadow: initial;
   border-radius: initial;
