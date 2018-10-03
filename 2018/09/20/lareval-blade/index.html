@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Laravel 的 Blade 模板支持继承，这意味多个子视图可以共用父视图提供的视图模板。接下来让我们修改之前创建的首页视图文件，来学习下如何使用 Blade 模板的继承。 @extends(‘layouts.default’)@section(‘content’)  主页@stop 我们使用了 @extends 并通过传参来继承父视图 layouts/default.blade.php 的视图">
+<meta name="description" content="&amp;lt;title&amp;gt;@yield(&amp;#39;title&amp;#39;,&amp;#39;sample&amp;#39;)&amp;lt;/titlei&amp;gt;设置t网站标题给yield传了两个参数 ，第一个是该区块的变量名称，第二个参数为默认值，表示当制定变量的值为空值时，使用sample作为默认值 @extends(&amp;#39;&amp;#39;)继承@section(&amp;#39;content&amp;#39;)&amp;lt;&amp;gt;&amp;lt">
 <meta name="keywords" content="lareval,blade,php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[lareval&#x2F;blade]">
 <meta property="og:url" content="http://yoursite.com/2018/09/20/lareval-blade/index.html">
 <meta property="og:site_name" content="mist">
-<meta property="og:description" content="Laravel 的 Blade 模板支持继承，这意味多个子视图可以共用父视图提供的视图模板。接下来让我们修改之前创建的首页视图文件，来学习下如何使用 Blade 模板的继承。 @extends(‘layouts.default’)@section(‘content’)  主页@stop 我们使用了 @extends 并通过传参来继承父视图 layouts/default.blade.php 的视图">
+<meta property="og:description" content="&amp;lt;title&amp;gt;@yield(&amp;#39;title&amp;#39;,&amp;#39;sample&amp;#39;)&amp;lt;/titlei&amp;gt;设置t网站标题给yield传了两个参数 ，第一个是该区块的变量名称，第二个参数为默认值，表示当制定变量的值为空值时，使用sample作为默认值 @extends(&amp;#39;&amp;#39;)继承@section(&amp;#39;content&amp;#39;)&amp;lt;&amp;gt;&amp;lt">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-20T16:41:40.656Z">
+<meta property="og:updated_time" content="2018-09-21T14:08:20.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[lareval&#x2F;blade]">
-<meta name="twitter:description" content="Laravel 的 Blade 模板支持继承，这意味多个子视图可以共用父视图提供的视图模板。接下来让我们修改之前创建的首页视图文件，来学习下如何使用 Blade 模板的继承。 @extends(‘layouts.default’)@section(‘content’)  主页@stop 我们使用了 @extends 并通过传参来继承父视图 layouts/default.blade.php 的视图">
+<meta name="twitter:description" content="&amp;lt;title&amp;gt;@yield(&amp;#39;title&amp;#39;,&amp;#39;sample&amp;#39;)&amp;lt;/titlei&amp;gt;设置t网站标题给yield传了两个参数 ，第一个是该区块的变量名称，第二个参数为默认值，表示当制定变量的值为空值时，使用sample作为默认值 @extends(&amp;#39;&amp;#39;)继承@section(&amp;#39;content&amp;#39;)&amp;lt;&amp;gt;&amp;lt">
 
 
 
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  398字
+                  451字
                 </span>
               
 
@@ -373,14 +373,15 @@
       
 
       
-        <p>Laravel 的 Blade 模板支持继承，这意味多个子视图可以共用父视图提供的视图模板。接下来让我们修改之前创建的首页视图文件，来学习下如何使用 Blade 模板的继承。</p>
+        <p><code>&lt;title&gt;@yield(&#39;title&#39;,&#39;sample&#39;)&lt;/titlei&gt;</code>设置t网站标题<br>给yield传了两个参数 ，第一个是该区块的变量名称，第二个参数为默认值，表示当制定变量的值为空值时，使用sample作为默认值</p>
+<p><code>@extends(&#39;&#39;)</code>继承<br><code>@section(&#39;content&#39;)</code><br>&lt;&gt;&lt;&gt;<br><code>@stop</code></p>
+<p>Laravel 的 Blade 模板支持继承，这意味多个子视图可以共用父视图提供的视图模板。接下来让我们修改之前创建的首页视图文件，来学习下如何使用 Blade 模板的继承。</p>
 <p><code><br>@extends(‘layouts.default’)<br>@section(‘content’)<br>  <h1>主页</h1><br>@stop<br></code></p>
 <p>我们使用了 @extends 并通过传参来继承父视图 layouts/default.blade.php 的视图模板。</p>
 <p>使用 @section 和 @stop 代码来填充父视图的 content 区块，所有包含在 @section 和 @stop 中的代码都将被插入到父视图的 content 区块</p>
 <p>注意的是，当 @section 传递了第二个参数时，便不需要再通过 @stop 标识来告诉 Laravel 填充区块会在具体哪个位置结束。</p>
 <hr>
-<h1 id="Couldn’t-find-that-App"><a href="#Couldn’t-find-that-App" class="headerlink" title="Couldn’t find that App?"></a>Couldn’t find that App?</h1><p>创建于 1个月前 / 阅读数 140 / 评论数 1</p>
-<p>一开始是提示 403，按照下面的提示，将网上的项目删掉了，想要重新来。 heroku create 没问题，但是rename 或 heroku buildpacks:set heroku/php 时都提示 Couldn’t find that app 。然后发现，命令试图修改的，还是刚刚删除的那个app的名字。怎么切换到当前新建的app呢？ 还有就是，如果新建了好几个app，heroku 可以在它们之间切换吗？在网上搜了一下heroku的命令，没有找到关于切换的命令。</p>
+<h1 id="Couldn’t-find-that-App"><a href="#Couldn’t-find-that-App" class="headerlink" title="Couldn’t find that App?"></a>Couldn’t find that App?</h1><p>一开始是提示 403，按照下面的提示，将网上的项目删掉了，想要重新来。 heroku create 没问题，但是rename 或 heroku buildpacks:set heroku/php 时都提示 Couldn’t find that app 。然后发现，命令试图修改的，还是刚刚删除的那个app的名字。怎么切换到当前新建的app呢？ 还有就是，如果新建了好几个app，heroku 可以在它们之间切换吗？在网上搜了一下heroku的命令，没有找到关于切换的命令。</p>
 <p>附言 1  ·  1个月前<br>找到答案了：<br>heroku remote -v //查看远程的源<br>若远程的源不是你新建的 heroku app 地址。则删除之，重新添加源<br>删除方法: git remote rm heroku<br>新增方法： heroku git:remote -a yourapp</p>
 
       
@@ -505,7 +506,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -516,7 +517,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -527,7 +528,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
