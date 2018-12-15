@@ -88,7 +88,8 @@
 <meta property="og:description" content="Q：如何解决yarn install等一系列问题.A：直接覆盖public文件夹npm rebuild node-sass --no-bin-links npm run watch-poll监控动作保存app.scss的动作被捕捉到以后触发自动编译，将.css  存放到public/css当中 样式文件导入@import &amp;quot;&amp;quot;;允许添加变量 webpack.mix.js 的解析">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2018/10/03/5bb4260c1e7df.jpg">
-<meta property="og:updated_time" content="2018-10-03T02:15:00.492Z">
+<meta property="og:image" content="https://i.loli.net/2018/10/03/5bb427b0eeb49.jpg">
+<meta property="og:updated_time" content="2018-10-04T12:47:52.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="laravel 01 10-3">
 <meta name="twitter:description" content="Q：如何解决yarn install等一系列问题.A：直接覆盖public文件夹npm rebuild node-sass --no-bin-links npm run watch-poll监控动作保存app.scss的动作被捕捉到以后触发自动编译，将.css  存放到public/css当中 样式文件导入@import &amp;quot;&amp;quot;;允许添加变量 webpack.mix.js 的解析">
@@ -320,6 +321,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/03/laravel-01-10-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/03/laravel-01-10-3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -338,7 +349,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  388字
+                  639字
                 </span>
               
 
@@ -354,7 +365,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -388,6 +399,20 @@
 </ul>
 <p><code>@include</code> 是 Blade 提供的视图引用方法，可通过传参一个具体的文件路径名称来引用视图。</p>
 <p><img src="https://i.loli.net/2018/10/03/5bb4260c1e7df.jpg" alt="图床01.jpg"></p>
+<p>命名路由<br><img src="https://i.loli.net/2018/10/03/5bb427b0eeb49.jpg" alt="命名路由.jpg"></p>
+<p>from4.5</p>
+<p>这次我们把 signup 的路由请求交给用户控制器 UsersController 来处理。因为我们在后面会为注册页面添加上表单注册功能，到时候表单提交请求会与数据库进行交互，因此该页面并不能算静态页面，也就意味着我们不能再使用 StaticPagesController 来处理此动作。由于后面的用户注册、更新、删除等一系列操作都是围绕着用户进行的，因此统一使用用户控制器来处理此逻辑比较符合 Laravel 的开发规范。</p>
+<p>生成用户控制器<br><code>php artisan make:controller UsersController</code><br>在路由中我们会将用户注册页面的请求处理制定给用户控制器的 <code>create</code>进行处理</p>
+<p>接下来完成该方法的定义</p>
+<p><code>app/Http/Controllers/UsersController.php</code></p>
+<blockquote>
+<p>&lt;?php</p>
+<p>namespace App\Http\Controllers;</p>
+<p>use Illuminate\Http\Request;</p>
+<p>use APP\Http\Request;//完成方法定义</p>
+<p>class UsersController extends Controller<br>{<br>  public UsersController extends Controller<br>  {<br>      public function create()<br>      {<br>          return vies(‘users.create’);<br>      }<br>  }</p>
+<p>   //<br>}</p>
+</blockquote>
 
       
     </div>
@@ -455,6 +480,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -741,6 +769,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '0nLufCKsAvV18YG5ozJAFiqC-gzGzoHsz',
+        appKey: 'yYYWWFCgLv1l2utxEnxeGQ3f',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
