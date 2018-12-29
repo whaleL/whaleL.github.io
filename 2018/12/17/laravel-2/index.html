@@ -82,16 +82,16 @@
 <meta name="description" content="因为太长所以分开">
 <meta name="keywords" content="laravel学习,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="laravel 2 ">
+<meta property="og:title" content="laravel 2 （简单说一下部署到heroku上的步骤） ">
 <meta property="og:url" content="http://whalel.github.io/2018/12/17/laravel-2/index.html">
 <meta property="og:site_name" content="mist">
 <meta property="og:description" content="因为太长所以分开">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2018/12/17/5c175b3662ee9.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/17/5c17a0870e6d6.png">
-<meta property="og:updated_time" content="2018-12-17T13:16:48.883Z">
+<meta property="og:updated_time" content="2018-12-29T04:48:16.129Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="laravel 2 ">
+<meta name="twitter:title" content="laravel 2 （简单说一下部署到heroku上的步骤） ">
 <meta name="twitter:description" content="因为太长所以分开">
 <meta name="twitter:image" content="https://i.loli.net/2018/12/17/5c175b3662ee9.png">
 
@@ -129,7 +129,7 @@
 
 
 
-  <title>laravel 2  | mist</title>
+  <title>laravel 2 （简单说一下部署到heroku上的步骤）  | mist</title>
   
 
 
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">laravel 2 </h1>
+          <h1 class="post-title" itemprop="name headline">laravel 2 （简单说一下部署到heroku上的步骤） </h1>
         
 
         <div class="post-meta">
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  265字
+                  321字
                 </span>
               
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -397,6 +397,9 @@
 
       
         <p>因为太长所以分开<br><a id="more"></a></p>
+<h1 id="部署到heroku上"><a href="#部署到heroku上" class="headerlink" title="部署到heroku上"></a>部署到heroku上</h1><blockquote>
+<p>heroku login<br>进入项目文件夹<br>echo web: vendor/bin/heroku-php-apache2 public/ &gt; Procfile<br>heroku create name<br>heroku buildpacks:set heroku/php<br>设置app key<br>php artisan key:generate<br>heroku config:set APP_KEY=&lt;your_app_key&gt;<br>git add -A<br>git commit -m “”<br>git push heroku master<br>heroku open</p>
+</blockquote>
 <h1 id="添加页面"><a href="#添加页面" class="headerlink" title="添加页面"></a>添加页面</h1><p><code>routes/web.php</code></p>
 <p><code>Route::get(&#39;/signup&#39;, &#39;UsersController@create&#39;)-&gt;name(&#39;signup&#39;);</code></p>
 <p><code>/signup</code> <code>signup</code> 兼容</p>
@@ -430,7 +433,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://whalel.github.io/2018/12/17/laravel-2/" title="laravel 2 ">http://whalel.github.io/2018/12/17/laravel-2/</a>
+    <a href="http://whalel.github.io/2018/12/17/laravel-2/" title="laravel 2 （简单说一下部署到heroku上的步骤） ">http://whalel.github.io/2018/12/17/laravel-2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -469,6 +472,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/29/一些不值一提的混乱的没有根据的观察/" rel="prev" title="一些不值一提的混乱的没有根据的观察">
+                一些不值一提的混乱的没有根据的观察 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -548,7 +555,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -559,7 +566,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -570,7 +577,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -613,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#添加页面"><span class="nav-number">1.</span> <span class="nav-text">添加页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传遇到冲突-（scss和css）"><span class="nav-number">2.</span> <span class="nav-text">上传遇到冲突 （scss和css）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库迁移"><span class="nav-number">3.</span> <span class="nav-text">数据库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#up方法中调用Schema类的create方法创建users表"><span class="nav-number">3.1.</span> <span class="nav-text">up方法中调用Schema类的create方法创建users表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#down逆向操作-drop-删除表"><span class="nav-number">3.2.</span> <span class="nav-text">down逆向操作 drop 删除表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#user模型"><span class="nav-number">4.</span> <span class="nav-text">user模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">5.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eloquent表命名约定"><span class="nav-number">6.</span> <span class="nav-text">Eloquent表命名约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户对象"><span class="nav-number">7.</span> <span class="nav-text">创建用户对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署到heroku上"><span class="nav-number">1.</span> <span class="nav-text">部署到heroku上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加页面"><span class="nav-number">2.</span> <span class="nav-text">添加页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传遇到冲突-（scss和css）"><span class="nav-number">3.</span> <span class="nav-text">上传遇到冲突 （scss和css）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库迁移"><span class="nav-number">4.</span> <span class="nav-text">数据库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#up方法中调用Schema类的create方法创建users表"><span class="nav-number">4.1.</span> <span class="nav-text">up方法中调用Schema类的create方法创建users表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#down逆向操作-drop-删除表"><span class="nav-number">4.2.</span> <span class="nav-text">down逆向操作 drop 删除表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#user模型"><span class="nav-number">5.</span> <span class="nav-text">user模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">6.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eloquent表命名约定"><span class="nav-number">7.</span> <span class="nav-text">Eloquent表命名约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户对象"><span class="nav-number">8.</span> <span class="nav-text">创建用户对象</span></a></li></ol></div>
             
 
           </div>
