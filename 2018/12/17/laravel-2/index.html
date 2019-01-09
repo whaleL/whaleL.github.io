@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2018/12/17/5c175b3662ee9.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/17/5c17a0870e6d6.png">
-<meta property="og:updated_time" content="2018-12-29T04:48:16.129Z">
+<meta property="og:updated_time" content="2019-01-08T16:32:59.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="laravel 2 （简单说一下部署到heroku上的步骤） ">
 <meta name="twitter:description" content="因为太长所以分开">
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  321字
+                  349字
                 </span>
               
 
@@ -398,7 +398,7 @@
       
         <p>因为太长所以分开<br><a id="more"></a></p>
 <h1 id="部署到heroku上"><a href="#部署到heroku上" class="headerlink" title="部署到heroku上"></a>部署到heroku上</h1><blockquote>
-<p>heroku login<br>进入项目文件夹<br>echo web: vendor/bin/heroku-php-apache2 public/ &gt; Procfile<br>heroku create name<br>heroku buildpacks:set heroku/php<br>设置app key<br>php artisan key:generate<br>heroku config:set APP_KEY=&lt;your_app_key&gt;<br>git add -A<br>git commit -m “”<br>git push heroku master<br>heroku open</p>
+<p>heroku login<br>进入项目文件夹<br>echo web: vendor/bin/heroku-php-apache2 public/ &gt; Procfile //这个出现问题一般会went wrong<br>heroku create name<br>heroku buildpacks:set heroku/php //这个是声明使用的语言，我这里用的是PHP<br>设置app key<br>php artisan key:generate<br>heroku config:set APP_KEY=&lt;your_app_key&gt;<br>git add -A<br>git commit -m “”<br>git push heroku master<br>heroku open</p>
 </blockquote>
 <h1 id="添加页面"><a href="#添加页面" class="headerlink" title="添加页面"></a>添加页面</h1><p><code>routes/web.php</code></p>
 <p><code>Route::get(&#39;/signup&#39;, &#39;UsersController@create&#39;)-&gt;name(&#39;signup&#39;);</code></p>
@@ -408,7 +408,7 @@
 <h1 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h1><p><code>php artisan migrate</code><br>运行迁移，up被调用<br>回滚迁移，down被调用</p>
 <h2 id="up方法中调用Schema类的create方法创建users表"><a href="#up方法中调用Schema类的create方法创建users表" class="headerlink" title="up方法中调用Schema类的create方法创建users表"></a>up方法中调用Schema类的create方法创建users表</h2><p>create 方法 接受两个参数<br>1.数据表名称<br>2.$table的闭包</p>
 <h2 id="down逆向操作-drop-删除表"><a href="#down逆向操作-drop-删除表" class="headerlink" title="down逆向操作 drop 删除表"></a>down逆向操作 drop 删除表</h2><p><code>Schema::dropIfExists(&#39;users&#39;);</code></p>
-<h1 id="user模型"><a href="#user模型" class="headerlink" title="user模型"></a>user模型</h1><p>table<br>fillable<br>hidden<br>authenticatable：授权<br>notifiable:消息通知</p>
+<h1 id="user模型"><a href="#user模型" class="headerlink" title="user模型"></a>user模型</h1><p><code>table</code><br><code>fillable</code><br><code>hidden</code><br>authenticatable：授权<br>notifiable:消息通知</p>
 <h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p><code>php artisan make:model Models/Article</code><br><code>rm app/Models/Article.php</code>删除<br><code>php artisan make:model Models/Article -m</code>创建模型的同时创建数据库迁移</p>
 <h1 id="Eloquent表命名约定"><a href="#Eloquent表命名约定" class="headerlink" title="Eloquent表命名约定"></a>Eloquent表命名约定</h1><p>Artical 对应 articles 表<br>User 对应 users 表<br>BlogPost 对应 blog_posts 表</p>
 <p><a href="https://i.loli.net/2018/12/17/5c17a0870e6d6.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c17a0870e6d6.png" alt="指定表.png"></a></p>
