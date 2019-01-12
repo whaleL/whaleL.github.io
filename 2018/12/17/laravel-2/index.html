@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="因为太长所以分开">
+<meta name="description" content="部署到heroku的简单步骤/需要注意的地方 解决上传头像图裂的问题 其他">
 <meta name="keywords" content="laravel学习,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="laravel 2 （简单说一下部署到heroku上的步骤） ">
+<meta property="og:title" content="laravel 2  ">
 <meta property="og:url" content="http://whalel.github.io/2018/12/17/laravel-2/index.html">
 <meta property="og:site_name" content="mist">
-<meta property="og:description" content="因为太长所以分开">
+<meta property="og:description" content="部署到heroku的简单步骤/需要注意的地方 解决上传头像图裂的问题 其他">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2018/12/17/5c175b3662ee9.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/17/5c17a0870e6d6.png">
-<meta property="og:updated_time" content="2019-01-08T16:32:59.069Z">
+<meta property="og:updated_time" content="2019-01-10T14:40:58.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="laravel 2 （简单说一下部署到heroku上的步骤） ">
-<meta name="twitter:description" content="因为太长所以分开">
+<meta name="twitter:title" content="laravel 2  ">
+<meta name="twitter:description" content="部署到heroku的简单步骤/需要注意的地方 解决上传头像图裂的问题 其他">
 <meta name="twitter:image" content="https://i.loli.net/2018/12/17/5c175b3662ee9.png">
 
 
@@ -129,7 +129,7 @@
 
 
 
-  <title>laravel 2 （简单说一下部署到heroku上的步骤）  | mist</title>
+  <title>laravel 2   | mist</title>
   
 
 
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">laravel 2 （简单说一下部署到heroku上的步骤） </h1>
+          <h1 class="post-title" itemprop="name headline">laravel 2  </h1>
         
 
         <div class="post-meta">
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  349字
+                  611字
                 </span>
               
 
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -401,10 +401,19 @@
       
 
       
-        <p>因为太长所以分开<br><a id="more"></a></p>
+        <ol>
+<li>部署到heroku的简单步骤/需要注意的地方</li>
+<li>解决上传头像图裂的问题</li>
+<li>其他<a id="more"></a>
+</li>
+</ol>
 <h1 id="部署到heroku上"><a href="#部署到heroku上" class="headerlink" title="部署到heroku上"></a>部署到heroku上</h1><blockquote>
 <p>heroku login<br>进入项目文件夹<br>echo web: vendor/bin/heroku-php-apache2 public/ &gt; Procfile //这个出现问题一般会went wrong<br>heroku create name<br>heroku buildpacks:set heroku/php //这个是声明使用的语言，我这里用的是PHP<br>设置app key<br>php artisan key:generate<br>heroku config:set APP_KEY=&lt;your_app_key&gt;<br>git add -A<br>git commit -m “”<br>git push heroku master<br>heroku open</p>
 </blockquote>
+<h1 id="解决上传头像不显示的问题"><a href="#解决上传头像不显示的问题" class="headerlink" title="解决上传头像不显示的问题"></a>解决上传头像不显示的问题</h1><p><code>larabbs\app\Handlers\ImageUploadHandler.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> [</span><br><span class="line">           <span class="string">'path'</span> =&gt; config(<span class="string">'app.url'</span>) . <span class="string">"/$folder_name/$filename"</span></span><br><span class="line">       ];<span class="comment">//这里引用的文件路径问题</span></span><br></pre></td></tr></table></figure>
+<p><code>larabbs\config\app.php</code><br><code>&#39;url&#39; =&gt; env(&#39;APP_URL&#39;, &#39;http://localhost&#39;)</code></p>
+<p>检查.env文件的配置<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">APP_URL=http:<span class="comment">//localhost   </span></span><br><span class="line">修改为   </span><br><span class="line">APP_URL=http:<span class="comment">//你自己配置的网址名字哦</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="添加页面"><a href="#添加页面" class="headerlink" title="添加页面"></a>添加页面</h1><p><code>routes/web.php</code></p>
 <p><code>Route::get(&#39;/signup&#39;, &#39;UsersController@create&#39;)-&gt;name(&#39;signup&#39;);</code></p>
 <p><code>/signup</code> <code>signup</code> 兼容</p>
@@ -418,6 +427,14 @@
 <h1 id="Eloquent表命名约定"><a href="#Eloquent表命名约定" class="headerlink" title="Eloquent表命名约定"></a>Eloquent表命名约定</h1><p>Artical 对应 articles 表<br>User 对应 users 表<br>BlogPost 对应 blog_posts 表</p>
 <p><a href="https://i.loli.net/2018/12/17/5c17a0870e6d6.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c17a0870e6d6.png" alt="指定表.png"></a></p>
 <h1 id="创建用户对象"><a href="#创建用户对象" class="headerlink" title="创建用户对象"></a>创建用户对象</h1><p>先进入Tinker环境<br><code>php artisan tinker</code><br><code>&gt;&gt;&gt; App\Models\User::create([&#39;name&#39;=&gt; &#39;komaru&#39;, &#39;email&#39;=&gt;&#39;komaru@example.com&#39;,&#39;password&#39;=&gt;bcrypt(&#39;password&#39;)])</code><br><code>&gt;&gt;&gt;</code>代表 artisan tinker的运行环境</p>
+<h1 id="创建一个新分类"><a href="#创建一个新分类" class="headerlink" title="创建一个新分类"></a>创建一个新分类</h1><h2 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h2><p><code>$ php artisan make:model Models/Category -m</code><br><code>$ php artisan make:model 其实就是文件夹名字/Category -m</code></p>
+<p><code>-m</code>的意思是顺便创建数据库迁移文件</p>
+<p><code>php artisan migrate</code></p>
+<h2 id="修改fillable"><a href="#修改fillable" class="headerlink" title="修改fillable"></a>修改<code>fillable</code></h2><p>告诉程序什么字段可以修改</p>
+<h2 id="初始化分类数据"><a href="#初始化分类数据" class="headerlink" title="初始化分类数据"></a>初始化分类数据</h2><p><code>php artisan make:migration seed_categories_data</code></p>
+<p><code>php artisan migrate</code>执行迁移</p>
+<h2 id="添加模型之后-建立模型关联"><a href="#添加模型之后-建立模型关联" class="headerlink" title="添加模型之后 建立模型关联"></a>添加模型之后 建立模型关联</h2><p><code>app\http\models\Topic.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Models</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $fillable = [<span class="string">'title'</span>, <span class="string">'body'</span>, <span class="string">'user_id'</span>, <span class="string">'category_id'</span>, <span class="string">'reply_count'</span>, <span class="string">'view_count'</span>, <span class="string">'last_reply_user_id'</span>, <span class="string">'order'</span>, <span class="string">'excerpt'</span>, <span class="string">'slug'</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">category</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(Category::class);</span><br><span class="line">    &#125;<span class="comment">//模型关联</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">user</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(User::class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -438,7 +455,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://whalel.github.io/2018/12/17/laravel-2/" title="laravel 2 （简单说一下部署到heroku上的步骤） ">http://whalel.github.io/2018/12/17/laravel-2/</a>
+    <a href="http://whalel.github.io/2018/12/17/laravel-2/" title="laravel 2  ">http://whalel.github.io/2018/12/17/laravel-2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -468,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/17/关于git/" rel="next" title="关于git">
-                <i class="fa fa-chevron-left"></i> 关于git
+              <a href="/2018/12/17/关于git/" rel="next" title="关于git的一些备忘">
+                <i class="fa fa-chevron-left"></i> 关于git的一些备忘
               </a>
             
           </div>
@@ -571,7 +588,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -625,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署到heroku上"><span class="nav-number">1.</span> <span class="nav-text">部署到heroku上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加页面"><span class="nav-number">2.</span> <span class="nav-text">添加页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传遇到冲突-（scss和css）"><span class="nav-number">3.</span> <span class="nav-text">上传遇到冲突 （scss和css）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库迁移"><span class="nav-number">4.</span> <span class="nav-text">数据库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#up方法中调用Schema类的create方法创建users表"><span class="nav-number">4.1.</span> <span class="nav-text">up方法中调用Schema类的create方法创建users表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#down逆向操作-drop-删除表"><span class="nav-number">4.2.</span> <span class="nav-text">down逆向操作 drop 删除表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#user模型"><span class="nav-number">5.</span> <span class="nav-text">user模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">6.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eloquent表命名约定"><span class="nav-number">7.</span> <span class="nav-text">Eloquent表命名约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户对象"><span class="nav-number">8.</span> <span class="nav-text">创建用户对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署到heroku上"><span class="nav-number">1.</span> <span class="nav-text">部署到heroku上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决上传头像不显示的问题"><span class="nav-number">2.</span> <span class="nav-text">解决上传头像不显示的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加页面"><span class="nav-number">3.</span> <span class="nav-text">添加页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传遇到冲突-（scss和css）"><span class="nav-number">4.</span> <span class="nav-text">上传遇到冲突 （scss和css）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库迁移"><span class="nav-number">5.</span> <span class="nav-text">数据库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#up方法中调用Schema类的create方法创建users表"><span class="nav-number">5.1.</span> <span class="nav-text">up方法中调用Schema类的create方法创建users表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#down逆向操作-drop-删除表"><span class="nav-number">5.2.</span> <span class="nav-text">down逆向操作 drop 删除表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#user模型"><span class="nav-number">6.</span> <span class="nav-text">user模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">7.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eloquent表命名约定"><span class="nav-number">8.</span> <span class="nav-text">Eloquent表命名约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户对象"><span class="nav-number">9.</span> <span class="nav-text">创建用户对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个新分类"><span class="nav-number">10.</span> <span class="nav-text">创建一个新分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建模型"><span class="nav-number">10.1.</span> <span class="nav-text">创建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改fillable"><span class="nav-number">10.2.</span> <span class="nav-text">修改fillable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化分类数据"><span class="nav-number">10.3.</span> <span class="nav-text">初始化分类数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加模型之后-建立模型关联"><span class="nav-number">10.4.</span> <span class="nav-text">添加模型之后 建立模型关联</span></a></li></ol></li></ol></div>
             
 
           </div>
