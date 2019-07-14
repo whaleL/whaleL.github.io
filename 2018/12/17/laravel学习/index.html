@@ -1,68 +1,946 @@
-extends base
+<!DOCTYPE html>
 
-block title
-  title= page.title + ' | ' + config.title
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-      if theme.wordcount == true
-        include _partial/wordcount.pug
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if theme.changyan
-      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
-        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
-        span= ' ' + __('Comment')
-      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
-    if theme.valine.enable
-      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
-        span.valine-comment-count(data-xid=url_for(page.path))
-        span= ' ' + __('Comment')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
-    .post-content
-      != page.content
-    if theme.donate.enable == true
-      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
 
-    if theme.post_copyright.enable == true && page.copyright != false
-      div
-        ul.post-copyright
-          li.post-copyright-author
-            strong= __('copyright_author_prefix')
-            = theme.post_copyright.author
-          li.post-copyright-link
-            strong= __('copyright_link_prefix')
-            a(href='/' + page.path)= page.permalink
-          li.post-copyright-license
-            strong= __('copyright_declare_prefix')
-            if theme.post_copyright.copyright_text
-              != theme.post_copyright.copyright_text
-            else
-              != __('copyright_default_text')
-      br
+  
 
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
 
-    include _partial/tag.pug
-    include _partial/post_nav.pug
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
-    if page.comments
-      include _partial/comments.pug
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="laravel,PHP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="真实·踩坑不完全·不具备参考性·我自己也看不懂·指南比较杂乱也没有总结。">
+<meta name="keywords" content="laravel,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laravel 1">
+<meta property="og:url" content="http://whalel.github.io/2018/12/17/laravel学习/index.html">
+<meta property="og:site_name" content="mist">
+<meta property="og:description" content="真实·踩坑不完全·不具备参考性·我自己也看不懂·指南比较杂乱也没有总结。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2018/12/17/5c170dd432660.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/17/5c1738dd00104.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/17/5c173a46bcda7.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/17/5c17715de2c68.png">
+<meta property="og:updated_time" content="2019-01-12T11:44:34.314Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="laravel 1">
+<meta name="twitter:description" content="真实·踩坑不完全·不具备参考性·我自己也看不懂·指南比较杂乱也没有总结。">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/17/5c170dd432660.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://whalel.github.io/2018/12/17/laravel学习/"/>
+
+
+
+
+
+  <title>laravel 1 | mist</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mist</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Books
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://whalel.github.io/2018/12/17/laravel学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="komaru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mist">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">laravel 1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T10:01:10+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程相关/" itemprop="url" rel="index">
+                    <span itemprop="name">编程相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/17/laravel学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/17/laravel学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,440字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>真实·踩坑不完全·不具备参考性·我自己也看不懂·指南<br>比较杂乱也没有总结。<br><a id="more"></a></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>1.<br><code>$</code> 命令行提示符 虚拟机<br><code>&gt;</code> 主机<br><code>cd..</code>到上一级目录<br><code>cd\</code>到根目录<br>项目使用里面以<code>public</code>为根文件夹<br>2.准备工作<br>搭建环境<br>虚拟机占空间真的好大——<br>附上教程 <a href="https://laravel-china.org/docs/laravel-development-environment/5.5" target="_blank" rel="noopener">环境搭建</a><br>3.虚拟机<br><code>vagrant init</code>初始化<br><code>vagrant up</code> 启动<br><code>vagrant halt</code> 关闭<br><code>vagrant destroy</code> 删除<br><code>vagrant provision</code> 重新应用更改的 配置<br><code>vagrant ssh</code>登录<br>4.又是最喜欢的test环节<br>网速好慢 持续connecting<br>之前用的是5.5，最近更新的是5.7<br><code>composer create-project laravel/laravel Laravel --prefer-dist &quot;5.7.*&quot;</code>创建一个test项目。<br><a href="https://i.loli.net/2018/12/17/5c170dd432660.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c170dd432660.png" alt="卡住]"></a></p>
+<blockquote>
+<p>git 的操作<br>这里要使用到git，因为很久之前就设置过，所以省略<br>使用heroku<br>其实不用也可以。<br><code>heroku login</code><br><code>heroku keys:add</code></p>
+</blockquote>
+<p>放置在heroku上<br> <code>heroku create 名字</code><br> <code>heroku rename</code><br> <code>heroku buildpacks:set heroku/php</code> 声明语言<br> <code>heroku domains</code>查看地址<br> <code>heroku logs</code></p>
+<p>设置app key<br><code>$ php artisan key:generate --show</code> 获得key<br><code>heroku config:set APP_KEY=</code>后面加上你的key</p>
+<p>部署上线<br><code>git push heroku master</code><br>使用 <code>heroku open</code>收获爱情（不是）。</p>
+<p>test成功啦<br>生成procfile时候不要打错字啦<br><code>echo web: vendor/bin/heroku-php-apache2 public/ &gt; Procfile</code><br>5.注意事项</p>
+<p><code>git merge xxxx</code>合并分支<br><code>git push</code><br><code>git push heroku master</code></p>
+<p><code>git add -A</code><br><code>git commit -m &quot;初始化样式&quot;</code></p>
+<h1 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作~"></a>开始工作~</h1><h2 id="进入所在文件夹。"><a href="#进入所在文件夹。" class="headerlink" title="进入所在文件夹。"></a>进入所在文件夹。</h2><p>都是在虚拟机中进行的.<br><code>composer create-project laravel/laravel weibo --prefer-dist &quot;5.7.*&quot;</code><br>下载的时候可能会有些慢，是不是墙的问题我也不清楚，反正都不是很快，可能是网速问题。</p>
+<h2 id="创建了新项目之后需要修改配置。"><a href="#创建了新项目之后需要修改配置。" class="headerlink" title="创建了新项目之后需要修改配置。"></a>创建了新项目之后需要修改配置。</h2><blockquote>
+<p>sites:</p>
+<ul>
+<li>map: homestead.test<br>to: /home/vagrant/Code/Laravel/public</li>
+<li>map: 你自己的 # &lt;— 这里<br>to: /home/vagrant/Code/xxxx/xxxx # &lt;— 这里  你自己的项目</li>
+</ul>
+</blockquote>
+<p>修改配置之后需要重新应用配置<br>重启虚拟机。（要在虚拟机目录下进行）</p>
+<blockquote>
+<p>folders:</p>
+<ul>
+<li>map: ~/code<br>to: /home/vagrant/code</li>
+<li>map: C:/Users/TR/Code/BBS<br>to: /home/vagrant/Code/BBS<br>这个也需要改的</li>
+</ul>
+</blockquote>
+<p><code>vagrant provision &amp;&amp; vagrant reload</code><br>然后重新登录<code>vagrant ssh</code></p>
+<h2 id="根据需要修改-env中的配置。"><a href="#根据需要修改-env中的配置。" class="headerlink" title="根据需要修改.env中的配置。"></a>根据需要修改.env中的配置。</h2><p><code>heroku create 名字</code>创建一个应用<br><code>echo web: vendor/bin/heroku-php-apache2 public/ &gt; Procfile</code><br><code>git add -A</code><br><code>git commit -m &quot;&quot;</code><br><code>git push</code></p>
+<h2 id="生成key"><a href="#生成key" class="headerlink" title="生成key"></a>生成key</h2><p><code>php artisan key:generate --show</code><br><code>heroku config:set APP_KEY= key</code></p>
+<p><code>git push heroku master</code>上传代码到heroku上</p>
+<h2 id="移除没有用的东西"><a href="#移除没有用的东西" class="headerlink" title="移除没有用的东西"></a>移除没有用的东西</h2><p><code>rm resources/views/welcome.blade.php</code></p>
+<h2 id="为路由器制定URL"><a href="#为路由器制定URL" class="headerlink" title="为路由器制定URL"></a>为路由器制定URL</h2><p>进入<code>routes/web.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">Route::get(<span class="string">'/'</span>, <span class="string">'StaticPagesController@home'</span>);</span><br><span class="line">Route::get(<span class="string">'/help'</span>, <span class="string">'StaticPagesController@help'</span>);</span><br><span class="line">Route::get(<span class="string">'/about'</span>, <span class="string">'StaticPagesController@about'</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在上面代码的代码中，我们为 get 方法传递了两个参数，第一个参数指明了 URL，第二个参数指明了处理该 URL 的控制器动作。get 表明这个路由将会响应 GET 请求，并将请求映射到指定的控制器动作上。比方说，我们向 <a href="http://weibo.test/" target="_blank" rel="noopener">http://weibo.test/</a> 发出了一个请求，则该请求将会由 StaticPagesController 的 home 方法进行处理。我们将在下节创建 StaticPagesController，为你讲解控制器在收到请求后如何进行相关操作。</p>
+</blockquote>
+<h3 id="laravel常用的http操作"><a href="#laravel常用的http操作" class="headerlink" title="laravel常用的http操作"></a>laravel常用的http操作</h3><ul>
+<li>GET 常用于页面读取</li>
+<li>POST 常用于数据提交</li>
+<li>PATCH 常用于数据更新</li>
+<li>DELETE 常用于数据删除</li>
+</ul>
+<p>后面两个是没有被浏览器支持的。</p>
+<h2 id="生成静态页面控制器"><a href="#生成静态页面控制器" class="headerlink" title="生成静态页面控制器"></a>生成静态页面控制器</h2><p><code>$ php artisan make:controller StaticPagesController</code><br>namespace代表的是命名空间</p>
+<p>可以理解为：<br>命名空间 = 文件路径<br>变量名 = 文件</p>
+<h2 id="制定页面的对应动作"><a href="#制定页面的对应动作" class="headerlink" title="制定页面的对应动作"></a>制定页面的对应动作</h2><p>进入<code>app/Http/Controllers/StaticPagesController.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticPagesController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">home</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'主页'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">help</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'帮助页'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">about</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'关于页'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="添加静态页面试图"><a href="#添加静态页面试图" class="headerlink" title="添加静态页面试图"></a>添加静态页面试图</h2><p>在控制器中渲染视图，用到view方法<br>view接收两个参数<br>1.路径名<br>2.视图绑定的数据（可选）</p>
+<p><a href="https://i.loli.net/2018/12/17/5c1738dd00104.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c1738dd00104.png" alt="view方法"></a></p>
+<h2 id="新增视图"><a href="#新增视图" class="headerlink" title="新增视图"></a>新增视图</h2><p><code>resources/views</code><br>新建文件<br><a href="https://i.loli.net/2018/12/17/5c173a46bcda7.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c173a46bcda7.png" alt="static_pages.png"></a></p>
+<h3 id="使用通用视图"><a href="#使用通用视图" class="headerlink" title="使用通用视图"></a>使用通用视图</h3><p><code>resources/views/layouts/default.blade.php</code></p>
+<p>下面的这行代码表示该占位区域将用于显示 content 区块的内容，而 content 区块的内容将由继承自 default 视图的子视图定义。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;Weibo App&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    @<span class="keyword">yield</span>(<span class="string">'content'</span>) <span class="comment">//这一行</span></span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>使用了 <code>@extends</code> 并通过传参来继承父视图 layouts/default.blade.php 的视图模板。</p>
+<p>使用 <code>@section</code> 和 <code>@stop</code> 代码来填充父视图的 content 区块，所有包含在 <code>@section</code> 和 <code>@stop</code> 中的代码都将被插入到父视图的 content 区块。</p>
+<h3 id="修改不同页面的title"><a href="#修改不同页面的title" class="headerlink" title="修改不同页面的title"></a>修改不同页面的title</h3><p>修改default<br>第一个的title是变量名称，第二个是默认名称</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;@<span class="keyword">yield</span>(<span class="string">'title'</span>, <span class="string">'Weibo'</span>)&lt;/title&gt; &lt;!--这里--&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    @<span class="keyword">yield</span>(<span class="string">'content'</span>)</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>修改其他的blade文件<br>当<code>@section</code>传入了第二个参数就不需要再通过<code>@stop</code>结束<br>eg.<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;Weibo App&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">@extends(<span class="string">'layouts.default'</span>)</span><br><span class="line">@section(<span class="string">'title'</span>,<span class="string">'about'</span>)</span><br><span class="line">  &lt;h1&gt;about&lt;/h1&gt;</span><br><span class="line">@stop</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="artisan-指令"><a href="#artisan-指令" class="headerlink" title="artisan 指令"></a>artisan 指令</h2><p><code>php artisan help migrate</code></p>
+<h1 id="样式的包装"><a href="#样式的包装" class="headerlink" title="样式的包装"></a>样式的包装</h1><p>在项目目录下进行：<br><code>yarn install --no-bin-links</code><br>建议翻墙。</p>
+<p><code>yarn add cross-dev</code>继续遇到问题，替换文件可行。<br>改成<code>yarn global add cross-env</code> </p>
+<h2 id="导入bootstrap"><a href="#导入bootstrap" class="headerlink" title="导入bootstrap"></a>导入bootstrap</h2><p>安装完成之后，让我们对 Laravel 默认生成的 app.scss 文件进行编辑，删除此文件里的所有内容，只留下面一行，导入 Bootstrap：</p>
+<p><code>resources/sass/app.scss</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Bootstrap</span><br><span class="line">@<span class="keyword">import</span> <span class="string">'~bootstrap/scss/bootstrap'</span>;</span><br></pre></td></tr></table></figure>
+<p><code>npm run dev</code></p>
+<p><code>npm run watch-poll</code>项目进行时候请一直保持 这句命令可以去<code>package.json</code>中找。</p>
+<h2 id="添加头部-底部视图"><a href="#添加头部-底部视图" class="headerlink" title="添加头部/底部视图"></a>添加头部/底部视图</h2><p><code>resources/views/layouts/_header.blade.php</code></p>
+<p>约定俗成 的名字</p>
+<p>引用<br><code>@include(&#39;layouts._header&#39;)</code></p>
+<h2 id="路由、渲染"><a href="#路由、渲染" class="headerlink" title="路由、渲染"></a>路由、渲染</h2><p><a href="https://i.loli.net/2018/12/17/5c17715de2c68.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c17715de2c68.png" alt="route.png"></a></p>
+<p>将路径名渲染成help</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    komaru
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://whalel.github.io/2018/12/17/laravel学习/" title="laravel 1">http://whalel.github.io/2018/12/17/laravel学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/laravel/" rel="tag"># laravel</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/15/番剧/" rel="next" title="番剧">
+                <i class="fa fa-chevron-left"></i> 番剧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/17/关于git/" rel="prev" title="git">
+                git <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">komaru</p>
+              <p class="site-description motion-element" itemprop="description">嘟噜噜</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mist.komaru@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始工作"><span class="nav-number">2.</span> <span class="nav-text">开始工作~</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进入所在文件夹。"><span class="nav-number">2.1.</span> <span class="nav-text">进入所在文件夹。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建了新项目之后需要修改配置。"><span class="nav-number">2.2.</span> <span class="nav-text">创建了新项目之后需要修改配置。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据需要修改-env中的配置。"><span class="nav-number">2.3.</span> <span class="nav-text">根据需要修改.env中的配置。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成key"><span class="nav-number">2.4.</span> <span class="nav-text">生成key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移除没有用的东西"><span class="nav-number">2.5.</span> <span class="nav-text">移除没有用的东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为路由器制定URL"><span class="nav-number">2.6.</span> <span class="nav-text">为路由器制定URL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#laravel常用的http操作"><span class="nav-number">2.6.1.</span> <span class="nav-text">laravel常用的http操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成静态页面控制器"><span class="nav-number">2.7.</span> <span class="nav-text">生成静态页面控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制定页面的对应动作"><span class="nav-number">2.8.</span> <span class="nav-text">制定页面的对应动作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加静态页面试图"><span class="nav-number">2.9.</span> <span class="nav-text">添加静态页面试图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增视图"><span class="nav-number">2.10.</span> <span class="nav-text">新增视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用通用视图"><span class="nav-number">2.10.1.</span> <span class="nav-text">使用通用视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改不同页面的title"><span class="nav-number">2.10.2.</span> <span class="nav-text">修改不同页面的title</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#artisan-指令"><span class="nav-number">2.11.</span> <span class="nav-text">artisan 指令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#样式的包装"><span class="nav-number">3.</span> <span class="nav-text">样式的包装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入bootstrap"><span class="nav-number">3.1.</span> <span class="nav-text">导入bootstrap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加头部-底部视图"><span class="nav-number">3.2.</span> <span class="nav-text">添加头部/底部视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由、渲染"><span class="nav-number">3.3.</span> <span class="nav-text">路由、渲染</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">komaru</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+
+    <!--<span id="busuanzi_container_site_pv">👁<span id="busuanzi_value_site_pv"></span>次</span>-->
+    <!--<span class="post-meta-divider">|</span>-->
+    <!--<span id="busuanzi_container_site_uv">✧<span id="busuanzi_value_site_uv"></span>人</span>-->
+    <!--<span class="post-meta-divider"></span>-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '0nLufCKsAvV18YG5ozJAFiqC-gzGzoHsz',
+        appKey: 'yYYWWFCgLv1l2utxEnxeGQ3f',
+        placeholder: '',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

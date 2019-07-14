@@ -1,68 +1,918 @@
-extends base
+<!DOCTYPE html>
 
-block title
-  title= page.title + ' | ' + config.title
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-      if theme.wordcount == true
-        include _partial/wordcount.pug
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if theme.changyan
-      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
-        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
-        span= ' ' + __('Comment')
-      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
-    if theme.valine.enable
-      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
-        span.valine-comment-count(data-xid=url_for(page.path))
-        span= ' ' + __('Comment')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
-    .post-content
-      != page.content
-    if theme.donate.enable == true
-      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
 
-    if theme.post_copyright.enable == true && page.copyright != false
-      div
-        ul.post-copyright
-          li.post-copyright-author
-            strong= __('copyright_author_prefix')
-            = theme.post_copyright.author
-          li.post-copyright-link
-            strong= __('copyright_link_prefix')
-            a(href='/' + page.path)= page.permalink
-          li.post-copyright-license
-            strong= __('copyright_declare_prefix')
-            if theme.post_copyright.copyright_text
-              != theme.post_copyright.copyright_text
-            else
-              != __('copyright_default_text')
-      br
+  
 
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
 
-    include _partial/tag.pug
-    include _partial/post_nav.pug
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
-    if page.comments
-      include _partial/comments.pug
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="laravel,PHP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="部署到heroku的简单步骤/需要注意的地方 解决上传头像图裂的问题 其他">
+<meta name="keywords" content="laravel,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laravel 2  ">
+<meta property="og:url" content="http://whalel.github.io/2018/12/17/laravel-2/index.html">
+<meta property="og:site_name" content="mist">
+<meta property="og:description" content="部署到heroku的简单步骤/需要注意的地方 解决上传头像图裂的问题 其他">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2018/12/17/5c175b3662ee9.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/17/5c17a0870e6d6.png">
+<meta property="og:updated_time" content="2019-04-25T07:31:08.055Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="laravel 2  ">
+<meta name="twitter:description" content="部署到heroku的简单步骤/需要注意的地方 解决上传头像图裂的问题 其他">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/17/5c175b3662ee9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://whalel.github.io/2018/12/17/laravel-2/"/>
+
+
+
+
+
+  <title>laravel 2   | mist</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mist</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Books
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://whalel.github.io/2018/12/17/laravel-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="komaru">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mist">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">laravel 2  </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T16:10:53+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程相关/" itemprop="url" rel="index">
+                    <span itemprop="name">编程相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/17/laravel-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/17/laravel-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  687字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>部署到heroku的简单步骤/需要注意的地方</li>
+<li>解决上传头像图裂的问题</li>
+<li>其他<a id="more"></a>
+</li>
+</ol>
+<h1 id="部署到heroku上"><a href="#部署到heroku上" class="headerlink" title="部署到heroku上"></a>部署到heroku上</h1><blockquote>
+<p>heroku login<br>进入项目文件夹<br>echo web: vendor/bin/heroku-php-apache2 public/ &gt; Procfile //这个出现问题一般会went wrong<br>heroku create name<br>heroku buildpacks:set heroku/php //这个是声明使用的语言，我这里用的是PHP<br>设置app key<br>php artisan key:generate<br>heroku config:set APP_KEY=&lt;your_app_key&gt;<br>git add -A<br>git commit -m “”<br>git push heroku master<br>heroku open</p>
+</blockquote>
+<blockquote>
+<p>heroku run php artisan migrate<br>heroku run php artisan tinker</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>App\Models\User::where(‘activated’, false)-&gt;update([‘activated’ =&gt; true, ‘activation_token’ =&gt; null])</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><code>composer dump-autoload</code><br><code>https://learnku.com/laravel/t/22059</code></p>
+<h1 id="解决上传头像不显示的问题"><a href="#解决上传头像不显示的问题" class="headerlink" title="解决上传头像不显示的问题"></a>解决上传头像不显示的问题</h1><p><code>larabbs\app\Handlers\ImageUploadHandler.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> [</span><br><span class="line">           <span class="string">'path'</span> =&gt; config(<span class="string">'app.url'</span>) . <span class="string">"/$folder_name/$filename"</span></span><br><span class="line">       ];<span class="comment">//这里引用的文件路径问题，我寻思着这里好像可以改一改</span></span><br></pre></td></tr></table></figure>
+<p><code>项目文件名\config\app.php</code><br><code>&#39;url&#39; =&gt; env(&#39;APP_URL&#39;, &#39;http://localhost&#39;)</code></p>
+<p>检查.env文件的配置<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">APP_URL=http:<span class="comment">//localhost   </span></span><br><span class="line">修改为   </span><br><span class="line">APP_URL=http:<span class="comment">//你自己配置的网址名字哦</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="添加页面"><a href="#添加页面" class="headerlink" title="添加页面"></a>添加页面</h1><p><code>routes/web.php</code></p>
+<p><code>Route::get(&#39;/signup&#39;, &#39;UsersController@create&#39;)-&gt;name(&#39;signup&#39;);</code></p>
+<p><code>/signup</code> <code>signup</code> 兼容</p>
+<p>生成用户控制器<br><code>php artisan make:controller UsersController</code><br><code>app/Http/Controllers/UsersController.php</code><br><a href="https://i.loli.net/2018/12/17/5c175b3662ee9.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c175b3662ee9.png" alt="usercontroller.png"></a></p>
+<h1 id="上传遇到冲突-（scss和css）"><a href="#上传遇到冲突-（scss和css）" class="headerlink" title="上传遇到冲突 （scss和css）"></a>上传遇到冲突 （scss和css）</h1><p><code>git checkout master</code><br><code>git status</code>查看是否有冲突<br><code>git checkout</code>.<br><code>rm -f public/mix-manifest.json</code><br><code>git merge filling-layout-style</code><br>没有遇到的话就不用删除了。</p>
+<h1 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h1><p><code>php artisan migrate</code><br>运行迁移，up被调用<br>回滚迁移，down被调用</p>
+<h2 id="up方法中调用Schema类的create方法创建users表"><a href="#up方法中调用Schema类的create方法创建users表" class="headerlink" title="up方法中调用Schema类的create方法创建users表"></a>up方法中调用Schema类的create方法创建users表</h2><p>create 方法 接受两个参数<br>1.数据表名称<br>2.$table的闭包</p>
+<h2 id="down逆向操作-drop-删除表"><a href="#down逆向操作-drop-删除表" class="headerlink" title="down逆向操作 drop 删除表"></a>down逆向操作 drop 删除表</h2><p><code>Schema::dropIfExists(&#39;users&#39;);</code></p>
+<h1 id="user模型"><a href="#user模型" class="headerlink" title="user模型"></a>user模型</h1><p><code>table</code><br><code>fillable</code><br><code>hidden</code><br>authenticatable：授权<br>notifiable:消息通知</p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p><code>php artisan make:model Models/Article</code><br><code>rm app/Models/Article.php</code>删除<br><code>php artisan make:model Models/Article -m</code>创建模型的同时创建数据库迁移</p>
+<h1 id="Eloquent表命名约定"><a href="#Eloquent表命名约定" class="headerlink" title="Eloquent表命名约定"></a>Eloquent表命名约定</h1><p>Artical 对应 articles 表<br>User 对应 users 表<br>BlogPost 对应 blog_posts 表</p>
+<p><a href="https://i.loli.net/2018/12/17/5c17a0870e6d6.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2018/12/17/5c17a0870e6d6.png" alt="指定表.png"></a></p>
+<h1 id="创建用户对象"><a href="#创建用户对象" class="headerlink" title="创建用户对象"></a>创建用户对象</h1><p>先进入Tinker环境<br><code>php artisan tinker</code><br><code>&gt;&gt;&gt; App\Models\User::create([&#39;name&#39;=&gt; &#39;komaru&#39;, &#39;email&#39;=&gt;&#39;komaru@example.com&#39;,&#39;password&#39;=&gt;bcrypt(&#39;password&#39;)])</code><br><code>&gt;&gt;&gt;</code>代表 artisan tinker的运行环境</p>
+<h1 id="创建一个新分类"><a href="#创建一个新分类" class="headerlink" title="创建一个新分类"></a>创建一个新分类</h1><h2 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h2><p><code>$ php artisan make:model Models/Category -m</code><br><code>$ php artisan make:model 其实就是文件夹名字/Category -m</code></p>
+<p><code>-m</code>的意思是顺便创建数据库迁移文件</p>
+<p><code>php artisan migrate</code></p>
+<h2 id="修改fillable"><a href="#修改fillable" class="headerlink" title="修改fillable"></a>修改<code>fillable</code></h2><p>告诉程序什么字段可以修改</p>
+<h2 id="初始化分类数据"><a href="#初始化分类数据" class="headerlink" title="初始化分类数据"></a>初始化分类数据</h2><p><code>php artisan make:migration seed_categories_data</code></p>
+<p><code>php artisan migrate</code>执行迁移</p>
+<h2 id="添加模型之后-建立模型关联"><a href="#添加模型之后-建立模型关联" class="headerlink" title="添加模型之后 建立模型关联"></a>添加模型之后 建立模型关联</h2><p><code>app\http\models\Topic.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Models</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $fillable = [<span class="string">'title'</span>, <span class="string">'body'</span>, <span class="string">'user_id'</span>, <span class="string">'category_id'</span>, <span class="string">'reply_count'</span>, <span class="string">'view_count'</span>, <span class="string">'last_reply_user_id'</span>, <span class="string">'order'</span>, <span class="string">'excerpt'</span>, <span class="string">'slug'</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">category</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(Category::class);</span><br><span class="line">    &#125;<span class="comment">//模型关联</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">user</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(User::class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="改变标题"><a href="#改变标题" class="headerlink" title="改变标题"></a>改变标题</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@section(<span class="string">'title'</span>, <span class="string">'话题列表'</span>)</span><br><span class="line">@section(<span class="string">'title'</span>, <span class="keyword">isset</span>($category) ? $category-&gt;name : <span class="string">'话题列表'</span>) <span class="comment">//使用三元运算符</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    komaru
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://whalel.github.io/2018/12/17/laravel-2/" title="laravel 2  ">http://whalel.github.io/2018/12/17/laravel-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/laravel/" rel="tag"># laravel</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/17/关于git/" rel="next" title="git">
+                <i class="fa fa-chevron-left"></i> git
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/29/一些不值一提的混乱的没有根据的观察/" rel="prev" title="一些不值一提的混乱的没有根据的观察">
+                一些不值一提的混乱的没有根据的观察 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">komaru</p>
+              <p class="site-description motion-element" itemprop="description">嘟噜噜</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:mist.komaru@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署到heroku上"><span class="nav-number">1.</span> <span class="nav-text">部署到heroku上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决上传头像不显示的问题"><span class="nav-number">2.</span> <span class="nav-text">解决上传头像不显示的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加页面"><span class="nav-number">3.</span> <span class="nav-text">添加页面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传遇到冲突-（scss和css）"><span class="nav-number">4.</span> <span class="nav-text">上传遇到冲突 （scss和css）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库迁移"><span class="nav-number">5.</span> <span class="nav-text">数据库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#up方法中调用Schema类的create方法创建users表"><span class="nav-number">5.1.</span> <span class="nav-text">up方法中调用Schema类的create方法创建users表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#down逆向操作-drop-删除表"><span class="nav-number">5.2.</span> <span class="nav-text">down逆向操作 drop 删除表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#user模型"><span class="nav-number">6.</span> <span class="nav-text">user模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">7.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eloquent表命名约定"><span class="nav-number">8.</span> <span class="nav-text">Eloquent表命名约定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户对象"><span class="nav-number">9.</span> <span class="nav-text">创建用户对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个新分类"><span class="nav-number">10.</span> <span class="nav-text">创建一个新分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建模型"><span class="nav-number">10.1.</span> <span class="nav-text">创建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改fillable"><span class="nav-number">10.2.</span> <span class="nav-text">修改fillable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化分类数据"><span class="nav-number">10.3.</span> <span class="nav-text">初始化分类数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加模型之后-建立模型关联"><span class="nav-number">10.4.</span> <span class="nav-text">添加模型之后 建立模型关联</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#改变标题"><span class="nav-number">11.</span> <span class="nav-text">改变标题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">komaru</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+
+    <!--<span id="busuanzi_container_site_pv">👁<span id="busuanzi_value_site_pv"></span>次</span>-->
+    <!--<span class="post-meta-divider">|</span>-->
+    <!--<span id="busuanzi_container_site_uv">✧<span id="busuanzi_value_site_uv"></span>人</span>-->
+    <!--<span class="post-meta-divider"></span>-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '0nLufCKsAvV18YG5ozJAFiqC-gzGzoHsz',
+        appKey: 'yYYWWFCgLv1l2utxEnxeGQ3f',
+        placeholder: '',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
